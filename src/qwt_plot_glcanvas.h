@@ -13,7 +13,7 @@
 #include "qwt_global.h"
 #include "qwt_plot_abstract_canvas.h"
 
-#include <qgl.h>
+#include <QtOpenGLWidgets/QOpenGLWidget>
 
 class QwtPlot;
 
@@ -42,7 +42,7 @@ class QwtPlot;
         Performance is worse, than rendering straight to a QGLWidget, but is usually
         better integrated into a desktop application.
  */
-class QWT_EXPORT QwtPlotGLCanvas : public QGLWidget, public QwtPlotAbstractGLCanvas
+class QWT_EXPORT QwtPlotGLCanvas : public QOpenGLWidget, public QwtPlotAbstractGLCanvas
 {
     Q_OBJECT
 
@@ -57,7 +57,6 @@ class QWT_EXPORT QwtPlotGLCanvas : public QGLWidget, public QwtPlotAbstractGLCan
 
   public:
     explicit QwtPlotGLCanvas( QwtPlot* = NULL );
-    explicit QwtPlotGLCanvas( const QGLFormat&, QwtPlot* = NULL );
     virtual ~QwtPlotGLCanvas();
 
     Q_INVOKABLE virtual void invalidateBackingStore() QWT_OVERRIDE;

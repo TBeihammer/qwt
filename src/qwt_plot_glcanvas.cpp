@@ -14,17 +14,19 @@
 #include <qcoreevent.h>
 #include <qpainter.h>
 #include <qpainterpath.h>
-#include <qglframebufferobject.h>
+#include <qopenglframebufferobject.h>
+#include <QOpenGLFramebufferObjectFormat>
+#include <QOpenGLPaintDevice>
 
 namespace
 {
-    class QwtPlotGLCanvasFormat : public QGLFormat
+    class QwtPlotGLCanvasFormat : public QOpenGLFramebufferObjectFormat
     {
       public:
         QwtPlotGLCanvasFormat()
-            : QGLFormat( QGLFormat::defaultFormat() )
+            : QOpenGLFramebufferObjectFormat( QOpenGLFramebufferObjectFormat() )
         {
-            setSampleBuffers( true );
+            setSamples(4);
         }
     };
 }
@@ -44,7 +46,7 @@ class QwtPlotGLCanvas::PrivateData
     }
 
     bool fboDirty;
-    QGLFramebufferObject* fbo;
+    QOpenGLFramebufferObject* fbo;
 };
 
 /*!
@@ -54,20 +56,7 @@ class QwtPlotGLCanvas::PrivateData
    \sa QwtPlot::setCanvas()
  */
 QwtPlotGLCanvas::QwtPlotGLCanvas( QwtPlot* plot )
-    : QGLWidget( QwtPlotGLCanvasFormat(), plot )
-    , QwtPlotAbstractGLCanvas( this )
-{
-    init();
-}
-/*!
-   \brief Constructor
-
-   \param format OpenGL rendering options
-   \param plot Parent plot widget
-   \sa QwtPlot::setCanvas()
- */
-QwtPlotGLCanvas::QwtPlotGLCanvas( const QGLFormat& format, QwtPlot* plot )
-    : QGLWidget( format, plot )
+    : QOpenGLWidget( plot )
     , QwtPlotAbstractGLCanvas( this )
 {
     init();
@@ -99,17 +88,17 @@ void QwtPlotGLCanvas::init()
  */
 void QwtPlotGLCanvas::paintEvent( QPaintEvent* event )
 {
-    QGLWidget::paintEvent( event );
+    QOpenGLWidget::paintEvent( event );
 }
 
 /*!
    Qt event handler for QEvent::PolishRequest and QEvent::StyleChange
    \param event Qt Event
-   \return See QGLWidget::event()
+   \return See QOpenGLWidget::event()
  */
 bool QwtPlotGLCanvas::event( QEvent* event )
 {
-    const bool ok = QGLWidget::event( event );
+    const bool ok = QOpenGLWidget::event( event );
 
     if ( event->type() == QEvent::PolishRequest ||
         event->type() == QEvent::StyleChange )
@@ -191,11 +180,11 @@ void QwtPlotGLCanvas::paintGL()
 
         if ( m_data->fbo == NULL )
         {
-            QGLFramebufferObjectFormat format;
+            QOpenGLFramebufferObjectFormat format;
             format.setSamples( 4 );
-            format.setAttachment(QGLFramebufferObject::CombinedDepthStencil);
+            format.setAttachment(QOpenGLFramebufferObject::Attachment::CombinedDepthStencil);
 
-            m_data->fbo = new QGLFramebufferObject( rect.size(), format );
+            m_data->fbo = new QOpenGLFramebufferObject( rect.size(), format );
             m_data->fboDirty = true;
         }
 
@@ -216,7 +205,7 @@ void QwtPlotGLCanvas::paintGL()
             usually makes more sense then.
          */
 
-        QGLFramebufferObject::blitFramebuffer( NULL,
+        QOpenGLFramebufferObject::blitFramebuffer( NULL,
             rect.translated( 0, height() - rect.height() ), m_data->fbo, rect );
     }
     else
