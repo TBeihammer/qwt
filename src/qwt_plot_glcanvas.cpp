@@ -190,7 +190,7 @@ void QwtPlotGLCanvas::paintGL()
 
         if ( m_data->fboDirty )
         {
-            QPainter fboPainter( m_data->fbo );
+            QPainter fboPainter;
             fboPainter.scale( pixelRatio, pixelRatio );
             draw( &fboPainter );
             fboPainter.end();
