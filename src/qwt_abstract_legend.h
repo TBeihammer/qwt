@@ -10,10 +10,11 @@
 #ifndef QWT_ABSTRACT_LEGEND_H
 #define QWT_ABSTRACT_LEGEND_H
 
+#include "qwt_legend_data.h"
 #include "qwt_global.h"
 #include <qframe.h>
+#include <QVariant>
 
-class QwtLegendData;
 template< typename T > class QList;
 class QVariant;
 

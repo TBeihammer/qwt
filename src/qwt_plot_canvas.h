@@ -14,10 +14,11 @@
 #include "qwt_plot_abstract_canvas.h"
 
 #include <qframe.h>
+#include <QPainterPath>
 
 class QwtPlot;
 class QPixmap;
-class QPainterPath;
+
 
 /*!
    \brief Canvas of a QwtPlot.

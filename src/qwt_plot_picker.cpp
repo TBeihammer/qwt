@@ -14,6 +14,7 @@
 #include "qwt_scale_map.h"
 #include "qwt_picker_machine.h"
 
+
 class QwtPlotPicker::PrivateData
 {
   public:

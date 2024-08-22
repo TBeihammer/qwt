@@ -15,7 +15,8 @@
 #include "qwt_axis_id.h"
 
 class QwtPlot;
-class QPointF;
+#include <QPointF>
+
 class QRectF;
 
 #if QT_VERSION < 0x060000

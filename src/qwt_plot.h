@@ -13,6 +13,7 @@
 #include "qwt_global.h"
 #include "qwt_axis_id.h"
 #include "qwt_plot_dict.h"
+#include "qwt_legend_data.h"
 
 #include <qframe.h>
 

@@ -14,23 +14,23 @@
 #include "qwt_event_pattern.h"
 
 #include <qobject.h>
+#include <QPen>
 
-class QwtPickerMachine;
-class QwtWidgetOverlay;
-class QwtText;
-class QWidget;
-class QMouseEvent;
-class QWheelEvent;
-class QKeyEvent;
-class QPainter;
-class QPen;
-class QFont;
-class QRegion;
-class QPainterPath;
-class QPoint;
-class QRect;
-class QSize;
-class QPolygon;
+#include "qwt_picker_machine.h"
+#include "qwt_widget_overlay.h"
+#include "qwt_text.h"
+#include <QWidget>
+#include <QMouseEvent>
+#include <QWheelEvent>
+#include <QKeyEvent>
+#include <QPainter>
+#include <QFont>
+#include <QRegion>
+#include <QPainterPath>
+#include <QPoint>
+#include <QRect>
+#include <QSize>
+#include <QPolygon>
 
 /*!
    \brief QwtPicker provides selections on a widget

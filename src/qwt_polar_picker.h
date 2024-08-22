@@ -17,7 +17,8 @@
 
 class QwtPolarPlot;
 class QwtPolarCanvas;
-class QwtPointPolar;
+
+#include "qwt_point_polar.h"
 
 /*!
    \brief QwtPolarPicker provides selections on a plot canvas
